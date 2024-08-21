@@ -5,7 +5,9 @@ import bridge.controller.BridgeController;
 public class Application {
 
     public static void main(String[] args) {
-        BridgeController bridgeController = new BridgeController();
+        AppConfig appConfig = new AppConfig();
+        BridgeController bridgeController = appConfig.setSystem();
         bridgeController.run();
+        appConfig.close();
     }
 }
