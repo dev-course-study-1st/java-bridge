@@ -1,6 +1,7 @@
 package bridge.view;
 
 import bridge.domain.BridgeSize;
+import bridge.domain.MovingCommand;
 import bridge.util.converter.ConverterHolder;
 import camp.nextstep.edu.missionutils.Console;
 
@@ -13,7 +14,7 @@ public class InputView {
      * 다리의 길이를 입력받는다.
      */
     public static BridgeSize readBridgeSize() {
-        System.out.println();
+        System.out.println("다리의 길이를 입력해주세요.");
         String input = Console.readLine();
         return ConverterHolder.convert(input, BridgeSize.class);
     }
@@ -21,8 +22,10 @@ public class InputView {
     /**
      * 사용자가 이동할 칸을 입력받는다.
      */
-    public String readMoving() {
-        return null;
+    public static MovingCommand readMoving() {
+        System.out.println("이동할 칸을 선택해주세요. (위: U, 아래: D)");
+        String input = Console.readLine();
+        return ConverterHolder.convert(input, MovingCommand.class);
     }
 
     /**

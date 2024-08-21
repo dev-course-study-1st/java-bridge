@@ -5,6 +5,7 @@ import bridge.service.BridgeGame;
 import bridge.service.BridgeService;
 import bridge.util.converter.ConverterHolder;
 import bridge.util.converter.StringToBridgeSizeConverter;
+import bridge.util.converter.StringToMovingCommandConverter;
 import java.util.List;
 
 public class AppConfig {
@@ -32,7 +33,8 @@ public class AppConfig {
 
     private void setConverters() {
         ConverterHolder.setConverters(List.of(
-                new StringToBridgeSizeConverter()
+                new StringToBridgeSizeConverter(),
+                new StringToMovingCommandConverter()
         ));
     }
 

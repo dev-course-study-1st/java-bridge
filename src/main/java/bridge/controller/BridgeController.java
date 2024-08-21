@@ -2,10 +2,10 @@ package bridge.controller;
 
 import bridge.domain.Bridge;
 import bridge.domain.BridgeSize;
+import bridge.domain.MovingCommand;
 import bridge.service.BridgeService;
 import bridge.view.InputViewProxy;
 import bridge.view.OutputView;
-import java.util.List;
 
 public class BridgeController {
 
@@ -20,9 +20,8 @@ public class BridgeController {
         BridgeSize size = InputViewProxy.readBridgeSize();
         System.out.println(size.getValue());
         Bridge bridge = bridgeService.makeBridge(size);
-        List<String> value = bridge.getValue();
-        for (String s : value) {
-            System.out.println("s = " + s);
+        while (true) {
+            MovingCommand movingCommand = InputViewProxy.readMoving();
         }
     }
 }
