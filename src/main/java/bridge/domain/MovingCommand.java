@@ -19,4 +19,8 @@ public enum MovingCommand {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("U 나 D를 입력해주세요."));
     }
+
+    public String getValue() {
+        return value;
+    }
 }

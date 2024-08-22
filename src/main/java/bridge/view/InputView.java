@@ -2,6 +2,7 @@ package bridge.view;
 
 import bridge.domain.BridgeSize;
 import bridge.domain.MovingCommand;
+import bridge.domain.RestartCommand;
 import bridge.util.converter.ConverterHolder;
 import camp.nextstep.edu.missionutils.Console;
 
@@ -31,7 +32,7 @@ public class InputView {
     /**
      * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
      */
-    public String readGameCommand() {
+    public RestartCommand readGameCommand() {
         return null;
     }
 }

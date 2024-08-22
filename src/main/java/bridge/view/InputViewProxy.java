@@ -2,6 +2,7 @@ package bridge.view;
 
 import bridge.domain.BridgeSize;
 import bridge.domain.MovingCommand;
+import bridge.domain.RestartCommand;
 import bridge.util.ExceptionHandler;
 
 public class InputViewProxy {
@@ -16,4 +17,7 @@ public class InputViewProxy {
         return ExceptionHandler.handle(InputView::readMoving);
     }
 
+    public static RestartCommand readGameCommand() {
+        return ExceptionHandler.handle(InputView::readGameCommand);;
+    }
 }

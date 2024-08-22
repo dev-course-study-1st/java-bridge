@@ -13,4 +13,8 @@ public class Bridge {
     public List<String> getValue() {
         return value;
     }
+
+    public boolean check(int index, String moving) {
+        return value.get(index).equals(moving);
+    }
 }
