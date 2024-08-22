@@ -18,6 +18,6 @@ public class InputViewProxy {
     }
 
     public static RestartCommand readGameCommand() {
-        return ExceptionHandler.handle(InputView::readGameCommand);;
+        return ExceptionHandler.handle(InputView::readGameCommand);
     }
 }

@@ -5,39 +5,39 @@ import bridge.domain.BridgeMap;
 import bridge.domain.MovingCommand;
 
 public class GameRepository {
-    private int attempts;
-    private boolean isSuccessInGame;
+    private int tryCount;
+    private boolean isSuccess;
     private Bridge bridge;
     private BridgeMap bridgeMap;
 
     public GameRepository() {
-        this.attempts = 1;
-        this.isSuccessInGame = false;
+        this.tryCount = 1;
+        this.isSuccess = false;
         this.bridgeMap = new BridgeMap();
     }
 
-    public void addAttempts() {
-        attempts++;
+    public BridgeMap getBridgeMap() {
+        return bridgeMap;
     }
 
-//    public void updateDiagram(MovingCommand movingCommand, RoundStatus roundStatus) {
-//        bridgeMap.updateDiagram(bridgeSign, roundStatus);
-//    }
+    public void addAttempts() {
+        tryCount++;
+    }
 
     public void setIsSuccessInGame() {
-        isSuccessInGame = true;
+        isSuccess = true;
     }
 
-    public void resetDiagrams() {
+    public void resetMaps() {
         bridgeMap = new BridgeMap();
     }
 
     public boolean getIsSuccessInGame() {
-        return isSuccessInGame;
+        return isSuccess;
     }
 
     public int getAttempts() {
-        return attempts;
+        return tryCount;
     }
 
     public void save(Bridge bridge) {
@@ -50,5 +50,9 @@ public class GameRepository {
 
     public int getSize() {
         return this.bridge.getValue().size();
+    }
+
+    public boolean isGo(int index, MovingCommand movingCommand) {
+        return this.bridge.getValue().get(index).equals(movingCommand.getValue());
     }
 }

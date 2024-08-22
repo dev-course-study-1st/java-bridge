@@ -1,6 +1,7 @@
 package bridge;
 
 import bridge.controller.BridgeController;
+import bridge.repository.GameRepository;
 import bridge.service.BridgeGame;
 import bridge.service.BridgeService;
 import bridge.util.converter.ConverterHolder;
@@ -16,7 +17,7 @@ public class AppConfig {
     }
 
     private BridgeService bridgeService() {
-        return new BridgeService(bridgeMaker(), bridgeGame());
+        return new BridgeService(bridgeMaker(), bridgeGame(), new GameRepository());
     }
 
     private BridgeMaker bridgeMaker() {
