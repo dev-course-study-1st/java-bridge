@@ -33,4 +33,12 @@ public class Bridge {
     public boolean validateBridgeSegment(List<String> bridge) {
         return bridge.stream().allMatch(segment -> segment.equals(BridgeEnum.UP.getBridgeSegmentStringType()) || segment.equals(BridgeEnum.DOWN.getBridgeSegmentStringType()));
     }
+
+    public boolean isMove(int currentLocation, String command) {
+        return bridge.get(currentLocation).equals(command);
+    }
+
+    public boolean isEndOfBridge(int currentLocation) {
+        return bridge.size() == currentLocation;
+    }
 }
