@@ -17,6 +17,7 @@ public class OutputView {
         System.out.println(createBridge(userBridge,gameBridge));
     }
 
+    // TODO : 현재 너무 복잡하게 사용되고 있음, 한가지 기능만을 하도록 변경
     private String createBridge(List<String> userBridge, List<String> gameBridge) {
         // 여기서 userBridge 와 gameBridge를 비교한다.
         // index가 같을 때 같은 문자열이면 O를 출력 아니면 X를 출력
@@ -56,12 +57,23 @@ public class OutputView {
      * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
     public void printResult(boolean isGameEnd, int tryCount) {
-        System.out.println("최종 게임 결과");
-        System.out.println("게임 성공 여부: " + (isGameEnd ? "성공" : "실패"));
-        System.out.println("총 시도한 횟수: " + tryCount);
+        System.out.println(GameMessage.OUTPUT_END_MESSAGE.getMessage());
+        System.out.printf(GameMessage.OUTPUT_GAME_RESULT.getMessage(),isGameEndStatusToString(isGameEnd));
+        System.out.printf(GameMessage.OUTPUT_TOTAL_COUNT.getMessage(),tryCount);
     }
 
     public void initGame() {
-        System.out.println("다리 건너기 게임을 시작합니다.");
+        System.out.println(GameMessage.OUTPUT_INIT_MESSAGE.getMessage());
+    }
+
+    public void printErrorMessage(String message) {
+        System.out.printf(GameMessage.OUTPUT_ERROR_MESSAGE.getMessage(),message);
+    }
+
+    private String isGameEndStatusToString(boolean isGameEnd) {
+        if(isGameEnd) {
+            return GameMessage.GAME_SUCCESS.getMessage();
+        }
+        return GameMessage.GAME_FAIL.getMessage();
     }
 }
