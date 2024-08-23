@@ -25,7 +25,7 @@ public class BridgeLength {
     }
 
     private int validateRange(int length) {
-        if(length >= Numbers.MIN_LENGTH.getNumber() && length <= Numbers.MAX_LENGTH.getNumber()) {
+        if(!(length >= Numbers.MIN_LENGTH.getNumber() && length <= Numbers.MAX_LENGTH.getNumber())) {
             throw new IllegalArgumentException(Errors.NOT_IN_RANGE_LENGTH_ERROR.getMessage());
         }
         return length;

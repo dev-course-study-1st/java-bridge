@@ -1,10 +1,10 @@
 package bridge.util.constant;
 
+import java.util.Optional;
+
 public enum Command {
-    U("Up"),
-    D("Down"),
-    R("Retry"),
-    Q("Quit");
+    RETRY("R"),
+    QUIT("Q");
 
     private final String command;
     Command(String command) {
@@ -13,5 +13,14 @@ public enum Command {
 
     public String getCommand() {
         return command;
+    }
+
+    public static Optional<Command> getEnum(String command) {
+        for (Command value : values()) {
+            if(value.getCommand().equals(command)){
+                return Optional.of(value);
+            }
+        }
+        return Optional.empty();
     }
 }

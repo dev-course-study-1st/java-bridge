@@ -1,8 +1,14 @@
 package bridge.view;
 
 import bridge.model.BridgeLength;
-import bridge.util.constant.Messages;
+import bridge.util.constant.Command;
+import bridge.util.constant.MoveKey;
 import camp.nextstep.edu.missionutils.Console;
+
+import static bridge.util.constant.Errors.INVALID_COMMAND_KEY_ERROR;
+import static bridge.util.constant.Errors.INVALID_MOVE_KEY_ERROR;
+import static bridge.util.constant.Messages.*;
+import static bridge.util.constant.Messages.INPUT_MOVE_KEY_MSG;
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -10,26 +16,49 @@ import camp.nextstep.edu.missionutils.Console;
 public class InputView {
 
 
-
     /**
      * 다리의 길이를 입력받는다.
      */
-    public static BridgeLength readBridgeSize() {
-        System.out.println(Messages.INPUT_LENGTH_MSG.getMessage());
-        return new BridgeLength(Console.readLine());
+    public BridgeLength readBridgeSize() {
+        BridgeLength bridgeLength = null;
+        while (bridgeLength == null) {
+            System.out.println(INPUT_LENGTH_MSG.getMessage());
+            try {
+                bridgeLength = new BridgeLength(Console.readLine().trim());
+            } catch (IllegalArgumentException e) {
+                OutputView.printError(e);
+            }
+        }
+        return bridgeLength;
     }
 
     /**
      * 사용자가 이동할 칸을 입력받는다.
      */
-    public String readMoving() {
-        return null;
+    public MoveKey readMoving() {
+        while (true) {
+            try {
+                System.out.println(INPUT_MOVE_KEY_MSG.getMessage());
+                return MoveKey.getEnum(Console.readLine().trim())
+                        .orElseThrow(() -> new IllegalArgumentException(INVALID_MOVE_KEY_ERROR.getMessage()));
+            } catch (IllegalArgumentException e) {
+                OutputView.printError(e);
+            }
+        }
     }
 
     /**
      * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
      */
-    public String readGameCommand() {
-        return null;
+    public Command readGameCommand() {
+        while (true) {
+            try {
+                System.out.println(INPUT_RETRY_OR_QUIT_MSG.getMessage());
+                return Command.getEnum(Console.readLine().trim())
+                        .orElseThrow(() -> new IllegalArgumentException(INVALID_COMMAND_KEY_ERROR.getMessage()));
+            } catch (IllegalArgumentException e) {
+                OutputView.printError(e);
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@ package bridge.util.constant;
 
 public enum Numbers {
 
+    BRIDGE_START(0),
     MIN_LENGTH(3),
     MAX_LENGTH(20);
 
