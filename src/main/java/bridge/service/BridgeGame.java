@@ -34,15 +34,22 @@ public class BridgeGame {
      * 재시작을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
     public boolean retry(String gameCommand) {
-        if (gameCommand.equals(RestartCommand.RESTART.getCommand())) {
+        if (isRetry(gameCommand)) {
             userBridge.resetUserBridge();
             tryCount++;
             return true;
         }
-        if (gameCommand.equals(RestartCommand.QUIT.getCommand())) {
+        return false;
+    }
+
+    private boolean isRetry(String command) {
+        if(command.equals(RestartCommand.RESTART.getCommand())) {
+            return true;
+        }
+        if (command.equals(RestartCommand.QUIT.getCommand())) {
             return false;
         }
-        throw new IllegalArgumentException("잘못된 입력입니다! R 또는 Q를 입력해주세요.");
+        throw new IllegalArgumentException("R 또는 Q를 입력해주세요.");
     }
 
     public boolean isGameEnd() {
