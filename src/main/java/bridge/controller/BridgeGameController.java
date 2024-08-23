@@ -11,27 +11,17 @@ public class BridgeGameController {
     private final OutputView outputView = new OutputView();
     private final InputView inputView = new InputView();
     private BridgeGame bridgeGame;
+    private boolean isGameEndStatus = false;
+    private boolean isGameRunning = false;
 
-    // TODO : Refactoring 진행하기 ident가 3 이하로 줄이기
     public void play() {
         outputView.initGame();
         Bridge bridge = initBridge();
         bridgeGame = new BridgeGame(bridge);
-        while (true) {
-            boolean isMove = inputMoving();
-            outputView.printMap(bridgeGame.getUserBridge().getUserBridge(), bridge.getBridge());
-            if (!isMove) {
-                if (!retry()) {
-                    outputView.printResult(false, bridgeGame.getTryCount());
-                    break;
-                }
-            }
-            boolean isGameEnd = bridgeGame.isGameEnd();
-            if (isGameEnd) {
-                outputView.printResult(true, bridgeGame.getTryCount());
-                break;
-            }
+        while (!isGameRunning) {
+            playOneRound(bridge);
         }
+        outputView.printResult(isGameEndStatus, bridgeGame.getTryCount());
     }
 
     private Bridge initBridge() {
@@ -52,6 +42,38 @@ public class BridgeGameController {
             outputView.printErrorMessage(e.getMessage());
             return inputMoving();
         }
+    }
+
+    private void playOneRound(Bridge bridge) {
+        if (!checkMove(bridge)) {
+            return;
+        }
+        if (checkGameEnd()) {
+            return;
+        }
+        playOneRound(bridge);
+    }
+
+    private boolean checkMove(Bridge bridge) {
+        boolean isMove = inputMoving();
+        outputView.printMap(bridgeGame.getUserBridge().getUserBridge(), bridge.getBridge());
+        if (!isMove) {
+            if (!retry()) {
+                isGameEndStatus = false;
+                isGameRunning = true;
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean checkGameEnd() {
+        boolean isGameEnd = bridgeGame.isGameEnd();
+        if (isGameEnd) {
+            isGameRunning = true;
+            return true;
+        }
+        return false;
     }
 
     private boolean retry() {
