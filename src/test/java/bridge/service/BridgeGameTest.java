@@ -81,6 +81,16 @@ public class BridgeGameTest {
         assertThat(bridgeGame.getUserBridge().size()).isEqualTo(0);
     }
 
+    @DisplayName("재시작 입력이 R인 경우 true를 반환한다.")
+    @Test
+    void retryWithRestartCommand() {
+        BridgeGame bridgeGame = new BridgeGame(bridge);
+        bridgeGame.move("U");
+        bridgeGame.move("D");
+
+        assertThat(bridgeGame.retry("R")).isTrue();
+    }
+
     @DisplayName("재시작 입력이 Q인 경우 false를 반환한다.")
     @Test
     void retryWithQuitCommand() {
