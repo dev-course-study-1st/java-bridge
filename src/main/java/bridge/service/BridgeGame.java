@@ -1,31 +1,60 @@
 package bridge.service;
 
+import bridge.BridgeMaker;
+import bridge.domain.ApplicationStatus;
+import bridge.domain.Bridge;
 import bridge.domain.BridgeMap;
+import bridge.domain.GameResult;
 import bridge.domain.MovingCommand;
 import bridge.domain.RoundStatus;
 import bridge.repository.GameRepository;
+import java.util.List;
 
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
 public class BridgeGame {
 
-    /**
-     * 사용자가 칸을 이동할 때 사용하는 메서드
-     * <p>
-     * 이동을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-     */
-    public void move(BridgeMap bridgeMap, MovingCommand movingCommand, RoundStatus roundStatus) {
-        bridgeMap.updateMap(movingCommand, roundStatus);
+    private final GameRepository gameRepository;
+    private final BridgeMap bridgeMap;
+    private final BridgeMaker bridgeMaker;
+
+    public BridgeGame(GameRepository gameRepository, BridgeMap bridgeMap, BridgeMaker bridgeMaker) {
+        this.gameRepository = gameRepository;
+        this.bridgeMap = bridgeMap;
+        this.bridgeMaker = bridgeMaker;
     }
 
-    /**
-     * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-     * <p>
-     * 재시작을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-     */
-    public void retry(GameRepository gameRepository) {
+    public void makeBridge(int value) {
+        List<String> strings = bridgeMaker.makeBridge(value);
+        Bridge bridge = new Bridge(strings);
+        gameRepository.save(bridge);
+    }
+
+    public BridgeMap move(int index, MovingCommand movingCommand) {
+        Bridge bridge = gameRepository.getBridge();
+        RoundStatus roundStatus = bridge.check(index, movingCommand.getValue()) ? RoundStatus.ROUND_CONTINUE
+                : RoundStatus.ROUND_END;
+        bridgeMap.updateMap(movingCommand, roundStatus);
+        return bridgeMap;
+    }
+
+    public ApplicationStatus retry() {
         gameRepository.addAttempts();
-        gameRepository.resetMaps();
+        bridgeMap.reset();
+        return ApplicationStatus.GAME_START;
+    }
+
+    public int getBridgeSize() {
+        return gameRepository.getSize();
+    }
+
+    public boolean isRoundEnd(int i, MovingCommand movingCommand) {
+        return !gameRepository.isGo(i, movingCommand);
+    }
+
+    public GameResult getResult() {
+        return new GameResult(gameRepository.getAttempts(), gameRepository.getIsSuccessInGame(), bridgeMap);
+    }
+
+    public void setIsSuccessInGame() {
+        gameRepository.setIsSuccessInGame();
     }
 }

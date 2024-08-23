@@ -1,9 +1,9 @@
 package bridge;
 
 import bridge.controller.BridgeController;
+import bridge.domain.BridgeMap;
 import bridge.repository.GameRepository;
 import bridge.service.BridgeGame;
-import bridge.service.BridgeService;
 import bridge.util.converter.ConverterHolder;
 import bridge.util.converter.StringToBridgeSizeConverter;
 import bridge.util.converter.StringToMovingCommandConverter;
@@ -13,11 +13,11 @@ public class AppConfig {
 
     public BridgeController setSystem() {
         setConverters();
-        return new BridgeController(bridgeService());
+        return new BridgeController(bridgeGame());
     }
 
-    private BridgeService bridgeService() {
-        return new BridgeService(bridgeMaker(), bridgeGame(), new GameRepository());
+    private BridgeGame bridgeGame() {
+        return new BridgeGame(gameRepository(), bridgeMap(), bridgeMaker());
     }
 
     private BridgeMaker bridgeMaker() {
@@ -28,8 +28,12 @@ public class AppConfig {
         return new BridgeRandomNumberGenerator();
     }
 
-    private BridgeGame bridgeGame() {
-        return new BridgeGame();
+    private GameRepository gameRepository() {
+        return new GameRepository();
+    }
+
+    private BridgeMap bridgeMap() {
+        return new BridgeMap();
     }
 
     private void setConverters() {

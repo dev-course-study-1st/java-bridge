@@ -5,7 +5,7 @@ import bridge.domain.BridgeMap;
 import bridge.domain.BridgeSize;
 import bridge.domain.MovingCommand;
 import bridge.domain.RestartCommand;
-import bridge.service.BridgeService;
+import bridge.service.BridgeGame;
 import bridge.view.InputViewProxy;
 import bridge.view.OutputView;
 import java.util.EnumMap;
@@ -14,11 +14,11 @@ import java.util.function.Supplier;
 
 public class BridgeController {
 
-    private final BridgeService bridgeService;
     private final Map<ApplicationStatus, Supplier<ApplicationStatus>> gameGuide;
+    private final BridgeGame bridgeGame;
 
-    public BridgeController(BridgeService bridgeService) {
-        this.bridgeService = bridgeService;
+    public BridgeController(BridgeGame bridgeGame) {
+        this.bridgeGame = bridgeGame;
         this.gameGuide = new EnumMap<>(ApplicationStatus.class);
         initializeGameGuide();
         OutputView.printStartMessage();
@@ -50,16 +50,16 @@ public class BridgeController {
 
     public ApplicationStatus createBridge() {
         BridgeSize size = InputViewProxy.readBridgeSize();
-        bridgeService.makeBridge(size);
+        bridgeGame.makeBridge(size.getValue());
         return ApplicationStatus.GAME_START;
     }
 
     private ApplicationStatus startGame() {
-        for (int i = 0; i < bridgeService.getBridgeSize(); i++) {
+        for (int i = 0; i < bridgeGame.getBridgeSize(); i++) {
             MovingCommand movingCommand = InputViewProxy.readMoving();
-            BridgeMap bridgeMap = bridgeService.move(i, movingCommand);
+            BridgeMap bridgeMap = bridgeGame.move(i, movingCommand);
             OutputView.printMap(bridgeMap);
-            if (bridgeService.isRoundEnd(i, movingCommand)) {
+            if (bridgeGame.isRoundEnd(i, movingCommand)) {
                 return ApplicationStatus.ROUND_END;
             }
         }
@@ -75,17 +75,17 @@ public class BridgeController {
     }
 
     private ApplicationStatus restartGame() {
-        return bridgeService.retry();
+        return bridgeGame.retry();
     }
 
     private ApplicationStatus quitGame() {
-        OutputView.printResult(bridgeService.getResult());
+        OutputView.printResult(bridgeGame.getResult());
         return ApplicationStatus.APPLICATION_EXIT;
     }
 
     private ApplicationStatus handleGameSuccess() {
-        bridgeService.setIsSuccessInGame();
-        OutputView.printResult(bridgeService.getResult());
+        bridgeGame.setIsSuccessInGame();
+        OutputView.printResult(bridgeGame.getResult());
         return ApplicationStatus.APPLICATION_EXIT;
     }
 }

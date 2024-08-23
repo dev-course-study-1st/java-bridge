@@ -6,8 +6,8 @@ import java.util.StringJoiner;
 
 public class BridgeMap {
 
-    private final List<String> upperMap;
-    private final List<String> lowerMap;
+    private List<String> upperMap;
+    private List<String> lowerMap;
 
     public BridgeMap() {
         this.upperMap = new ArrayList<>();
@@ -25,6 +25,11 @@ public class BridgeMap {
         }
     }
 
+    public void reset() {
+        this.upperMap = new ArrayList<>();
+        this.lowerMap = new ArrayList<>();
+    }
+
     @Override
     public String toString() {
         return formatDiagram(upperMap)
@@ -38,5 +43,4 @@ public class BridgeMap {
         }
         return stringJoiner.toString();
     }
-
 }
