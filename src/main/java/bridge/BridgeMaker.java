@@ -23,13 +23,12 @@ public class BridgeMaker {
     public List<String> makeBridge(int size) {
         List<String> bridge = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            bridge.add(generateBridgeSegment());
+            bridge.add(generateBridgeSegment(bridgeNumberGenerator.generate()));
         }
         return bridge;
     }
 
-    private String generateBridgeSegment() {
-        int bridgeNumber = bridgeNumberGenerator.generate();
+    private String generateBridgeSegment(int bridgeNumber) {
         if (bridgeNumber == BridgeEnum.DOWN.getBridgeSegmentIntType()) {
             return BridgeEnum.DOWN.getBridgeSegmentStringType();
         }
