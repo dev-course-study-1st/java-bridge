@@ -15,12 +15,20 @@ public class GameRepository {
         this.isSuccess = false;
     }
 
+    public void save(Bridge bridge) {
+        this.bridge = bridge;
+    }
+
     public void addAttempts() {
         tryCount++;
     }
 
     public void setIsSuccessInGame() {
         isSuccess = true;
+    }
+
+    public boolean isGo(int index, MovingCommand movingCommand) {
+        return bridge.canGo(index, movingCommand.getValue());
     }
 
     public boolean getIsSuccessInGame() {
@@ -31,20 +39,12 @@ public class GameRepository {
         return tryCount;
     }
 
-    public void save(Bridge bridge) {
-        this.bridge = bridge;
-    }
-
     public Bridge getBridge() {
         return bridge;
     }
 
     public int getSize() {
         return this.bridge.getValue().size();
-    }
-
-    public boolean isGo(int index, MovingCommand movingCommand) {
-        return this.bridge.canGo(index, movingCommand.getValue());
     }
 
 }

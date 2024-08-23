@@ -1,5 +1,7 @@
 package bridge.domain;
 
+import static bridge.domain.RoundStatus.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +18,10 @@ public class BridgeMap {
     public void updateMap(MovingCommand movingCommand, RoundStatus roundStatus) {
         if (movingCommand == MovingCommand.UP) {
             upperMap.add(roundStatus.getValue());
-            lowerMap.add(RoundStatus.SPACE.getValue());
+            lowerMap.add(SPACE.getValue());
         }
         if (movingCommand == MovingCommand.DOWN) {
-            upperMap.add(RoundStatus.SPACE.getValue());
+            upperMap.add(SPACE.getValue());
             lowerMap.add(roundStatus.getValue());
         }
     }
