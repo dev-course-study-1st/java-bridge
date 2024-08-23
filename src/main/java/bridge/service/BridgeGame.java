@@ -1,7 +1,6 @@
 package bridge.service;
 
 import bridge.BridgeMaker;
-import bridge.domain.ApplicationStatus;
 import bridge.domain.Bridge;
 import bridge.domain.BridgeMap;
 import bridge.domain.GameResult;
@@ -30,16 +29,21 @@ public class BridgeGame {
 
     public BridgeMap move(int index, MovingCommand movingCommand) {
         Bridge bridge = gameRepository.getBridge();
-        RoundStatus roundStatus = bridge.check(index, movingCommand.getValue()) ? RoundStatus.ROUND_CONTINUE
-                : RoundStatus.ROUND_END;
+        RoundStatus roundStatus = getRoundStates(index, movingCommand, bridge);
         bridgeMap.updateMap(movingCommand, roundStatus);
         return bridgeMap;
     }
 
-    public ApplicationStatus retry() {
+    private static RoundStatus getRoundStates(int index, MovingCommand movingCommand, Bridge bridge) {
+        if (bridge.canGo(index, movingCommand.getValue())) {
+            return RoundStatus.ROUND_CONTINUE;
+        }
+        return RoundStatus.ROUND_END;
+    }
+
+    public void retry() {
         gameRepository.addAttempts();
         bridgeMap.reset();
-        return ApplicationStatus.GAME_START;
     }
 
     public int getBridgeSize() {

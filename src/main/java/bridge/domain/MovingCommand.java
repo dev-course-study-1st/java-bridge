@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public enum MovingCommand {
 
-    U("U"),
-    D("D");
+    UP("U"),
+    DOWN("D");
 
     private final String value;
 

@@ -1,5 +1,7 @@
 package bridge.repository;
 
+import static bridge.util.Constant.FIRST_TRY;
+
 import bridge.domain.Bridge;
 import bridge.domain.MovingCommand;
 
@@ -9,7 +11,7 @@ public class GameRepository {
     private Bridge bridge;
 
     public GameRepository() {
-        this.tryCount = 1;
+        this.tryCount = FIRST_TRY.getValue();
         this.isSuccess = false;
     }
 
@@ -42,7 +44,7 @@ public class GameRepository {
     }
 
     public boolean isGo(int index, MovingCommand movingCommand) {
-        return this.bridge.check(index, movingCommand.getValue());
+        return this.bridge.canGo(index, movingCommand.getValue());
     }
 
 }

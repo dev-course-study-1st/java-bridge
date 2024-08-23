@@ -2,7 +2,6 @@ package bridge.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringJoiner;
 
 public class BridgeMap {
 
@@ -15,11 +14,11 @@ public class BridgeMap {
     }
 
     public void updateMap(MovingCommand movingCommand, RoundStatus roundStatus) {
-        if (movingCommand == MovingCommand.U) {
+        if (movingCommand == MovingCommand.UP) {
             upperMap.add(roundStatus.getValue());
             lowerMap.add(RoundStatus.SPACE.getValue());
         }
-        if (movingCommand == MovingCommand.D) {
+        if (movingCommand == MovingCommand.DOWN) {
             upperMap.add(RoundStatus.SPACE.getValue());
             lowerMap.add(roundStatus.getValue());
         }
@@ -30,17 +29,11 @@ public class BridgeMap {
         this.lowerMap = new ArrayList<>();
     }
 
-    @Override
-    public String toString() {
-        return formatDiagram(upperMap)
-                + formatDiagram(lowerMap);
+    public List<String> getUpperMap() {
+        return upperMap;
     }
 
-    private String formatDiagram(List<String> diagrams) {
-        StringJoiner stringJoiner = new StringJoiner(" | ", "[ ", " ]\n");
-        for (String diagram : diagrams) {
-            stringJoiner.add(diagram);
-        }
-        return stringJoiner.toString();
+    public List<String> getLowerMap() {
+        return lowerMap;
     }
 }

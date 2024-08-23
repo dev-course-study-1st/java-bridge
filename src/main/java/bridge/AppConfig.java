@@ -7,6 +7,7 @@ import bridge.service.BridgeGame;
 import bridge.util.converter.ConverterHolder;
 import bridge.util.converter.StringToBridgeSizeConverter;
 import bridge.util.converter.StringToMovingCommandConverter;
+import bridge.util.converter.StringToRestartCommand;
 import java.util.List;
 
 public class AppConfig {
@@ -39,7 +40,8 @@ public class AppConfig {
     private void setConverters() {
         ConverterHolder.setConverters(List.of(
                 new StringToBridgeSizeConverter(),
-                new StringToMovingCommandConverter()
+                new StringToMovingCommandConverter(),
+                new StringToRestartCommand()
         ));
     }
 

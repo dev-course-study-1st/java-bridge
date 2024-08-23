@@ -10,7 +10,7 @@ public enum ApplicationStatus {
     SELECT_RESTART,
     RESTART_GAME,
     QUIT_GAME,
-    GAME_SUCCESS,
+    FINISH_GAME,
     APPLICATION_EXIT;
 
     public boolean playable() {
