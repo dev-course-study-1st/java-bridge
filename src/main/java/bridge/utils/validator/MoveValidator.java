@@ -2,9 +2,10 @@ package bridge.utils.validator;
 
 import bridge.utils.enums.ErrorMessage;
 
+import static bridge.utils.enums.MoveCommend.DOWN;
+import static bridge.utils.enums.MoveCommend.UP;
+
 public class MoveValidator {
-    private static final String UP = "U";
-    private static final String DOWN = "D";
 
     private MoveValidator() {
     }
@@ -13,8 +14,8 @@ public class MoveValidator {
         return validateDirection(input);
     }
 
-    private static String validateDirection(String input){
-        if(!input.equals(UP)&&!input.equals(DOWN)){
+    private static String validateDirection(String input) {
+        if (!input.equals(UP.getCommend()) && !input.equals(DOWN.getCommend())) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_DIRECTION.getMessage());
         }
         return input;
