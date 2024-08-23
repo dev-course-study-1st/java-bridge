@@ -45,35 +45,25 @@ public class BridgeGameController {
     }
 
     private void playOneRound(Bridge bridge) {
-        if (!checkMove(bridge)) {
-            return;
-        }
-        if (checkGameEnd()) {
+        checkMove(bridge);
+        isGameEndStatus = bridgeGame.isGameEnd();
+        if (isGameEndStatus) {
             return;
         }
         playOneRound(bridge);
     }
 
-    private boolean checkMove(Bridge bridge) {
+    private void checkMove(Bridge bridge) {
         boolean isMove = inputMoving();
         outputView.printMap(bridgeGame.getUserBridge().getUserBridge(), bridge.getBridge());
         if (!isMove) {
             if (!retry()) {
                 isGameEndStatus = false;
-                isGameRunning = true;
-                return false;
+                isGameRunning = false;
+                return;
             }
         }
-        return true;
-    }
-
-    private boolean checkGameEnd() {
-        boolean isGameEnd = bridgeGame.isGameEnd();
-        if (isGameEnd) {
-            isGameRunning = true;
-            return true;
-        }
-        return false;
+        isGameRunning = true;
     }
 
     private boolean retry() {
