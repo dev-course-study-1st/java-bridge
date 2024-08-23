@@ -14,4 +14,8 @@ public class Position {
     public void increment() {
         value++;
     }
+
+    public void reset(int value) {
+        this.value = value;
+    }
 }

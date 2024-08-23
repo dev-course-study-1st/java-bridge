@@ -16,4 +16,8 @@ public class Bridge {
     public String getDirection(Position position){
         return bridgeDirections.get(position.getValue());
     }
+
+    public int getSize(){
+        return bridgeDirections.size();
+    }
 }

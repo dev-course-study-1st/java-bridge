@@ -6,4 +6,8 @@ public class BridgeSize {
     public BridgeSize(int value) {
         this.value = value;
     }
+
+    public int getValue() {
+        return value;
+    }
 }

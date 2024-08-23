@@ -1,8 +1,8 @@
 package bridge.utils.enums;
 
 public enum MoveCommend {
-    DOWN("D", 0),
-    UP("U", 1);
+    UP("U", 1),
+    DOWN("D", 0);
 
     private final String commend;
     private final int number;
@@ -23,6 +23,15 @@ public enum MoveCommend {
             }
         }
         throw new IllegalArgumentException(ErrorMessage.INVALID_GENERATE.getMessage());
+    }
+
+    public static MoveCommend fromString(String commend) {
+        for (MoveCommend moveCommend : MoveCommend.values()) {
+            if (moveCommend.getCommend().equalsIgnoreCase(commend)) {
+                return moveCommend;
+            }
+        }
+        throw new IllegalArgumentException(ErrorMessage.INVALID_DIRECTION.getMessage());
     }
 
     public boolean isEqualTo(String commend){

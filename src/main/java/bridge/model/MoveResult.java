@@ -15,8 +15,8 @@ public class MoveResult {
         return success;
     }
 
-    public String getDirection(){
-        return direction.getCommend();
+    public boolean isEqualDirection(MoveCommend direction){
+        return this.direction.equals(direction);
     }
 
 }

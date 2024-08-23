@@ -13,4 +13,9 @@ public enum RestartCommend {
     public String getCommend() {
         return commend;
     }
+
+    public boolean isEqualTo(String commend){
+        return this.commend.equals(commend);
+    }
+
 }
