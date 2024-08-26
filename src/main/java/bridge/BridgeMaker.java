@@ -29,12 +29,6 @@ public class BridgeMaker {
     }
 
     private String generateBridgeSegment(int bridgeNumber) {
-        if (bridgeNumber == BridgeEnum.DOWN.getBridgeSegmentIntType()) {
-            return BridgeEnum.DOWN.getBridgeSegmentStringType();
-        }
-        if (bridgeNumber == BridgeEnum.UP.getBridgeSegmentIntType()) {
-            return BridgeEnum.UP.getBridgeSegmentStringType();
-        }
-        throw new IllegalArgumentException("다리의 형태는 0 또는 1이어야 합니다.");
+        return BridgeEnum.intTypeToStringType(bridgeNumber).getBridgeSegmentStringType();
     }
 }
