@@ -1,7 +1,6 @@
 package bridge;
 
-import static bridge.domain.MovingCommand.*;
-
+import bridge.domain.MovingCommand;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,10 +21,6 @@ public class BridgeMaker {
     }
 
     private String getUnit() {
-        int generate = bridgeNumberGenerator.generate();
-        if (generate == 0) {
-            return DOWN.getValue();
-        }
-        return UP.getValue();
+        return MovingCommand.findByNumber(bridgeNumberGenerator.generate());
     }
 }

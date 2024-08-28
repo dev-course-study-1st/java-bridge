@@ -2,8 +2,6 @@ package bridge.service;
 
 import bridge.BridgeMaker;
 import bridge.BridgeNumberGenerator;
-import bridge.util.OneNumberGenerator;
-import bridge.util.ZeroNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +15,7 @@ public class BridgeMakerTest {
     @DisplayName("ZeroNumberGenerator를 사용하여 다리를 생성할 때, 모든 값이 DOWN인지 테스트")
     void makeBridgeShouldReturnAllDownWithZeroNumberGenerator() {
         // Given
-        BridgeNumberGenerator generator = new ZeroNumberGenerator();
+        BridgeNumberGenerator generator = () -> 0;
         BridgeMaker bridgeMaker = new BridgeMaker(generator);
         int bridgeSize = 3;
 
@@ -32,7 +30,7 @@ public class BridgeMakerTest {
     @DisplayName("OneNumberGenerator를 사용하여 다리를 생성할 때, 모든 값이 UP인지 테스트")
     void makeBridgeShouldReturnAllUpWithOneNumberGenerator() {
         // Given
-        BridgeNumberGenerator generator = new OneNumberGenerator();
+        BridgeNumberGenerator generator = () -> 1;
         BridgeMaker bridgeMaker = new BridgeMaker(generator);
         int bridgeSize = 3;
 

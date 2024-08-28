@@ -19,7 +19,7 @@ public class OutputView {
 
     public static void printResult(GameResult gameResult) {
         System.out.println(FINAL_RESULT_MESSAGE);
-        System.out.println(gameResult.getBridgeMap());
+        System.out.println(StringUtil.formatBridgeMap(gameResult.getBridgeMap()));
         System.out.println(StringUtil.formatResult(gameResult));
     }
 }

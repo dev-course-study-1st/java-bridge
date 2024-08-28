@@ -2,7 +2,7 @@ package bridge;
 
 import bridge.controller.BridgeController;
 import bridge.domain.BridgeMap;
-import bridge.repository.GameRepository;
+import bridge.domain.GameStatus;
 import bridge.service.BridgeGame;
 import bridge.util.converter.ConverterHolder;
 import bridge.util.converter.StringToBridgeSizeConverter;
@@ -18,7 +18,7 @@ public class AppConfig {
     }
 
     private BridgeGame bridgeGame() {
-        return new BridgeGame(gameRepository(), bridgeMap(), bridgeMaker());
+        return new BridgeGame(bridgeMap(), bridgeMaker(), gameStatus());
     }
 
     private BridgeMaker bridgeMaker() {
@@ -29,8 +29,8 @@ public class AppConfig {
         return new BridgeRandomNumberGenerator();
     }
 
-    private GameRepository gameRepository() {
-        return new GameRepository();
+    private GameStatus gameStatus() {
+        return new GameStatus();
     }
 
     private BridgeMap bridgeMap() {

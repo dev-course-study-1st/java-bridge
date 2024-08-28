@@ -10,11 +10,15 @@ public class Bridge {
         this.value = value;
     }
 
-    public boolean canGo(int index, String moving) {
-        return value.get(index).equals(moving);
+    public boolean canGo(int index, MovingCommand moving) {
+        return value.get(index).equals(moving.getValue());
     }
 
     public List<String> getValue() {
         return value;
+    }
+
+    public int getSize() {
+        return this.value.size();
     }
 }
