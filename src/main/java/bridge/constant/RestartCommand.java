@@ -13,4 +13,13 @@ public enum RestartCommand {
     public String getCommand() {
         return command;
     }
+
+    public static RestartCommand stringToCommand(String command) {
+        for (RestartCommand restartCommand : values()) {
+            if (restartCommand.command.equals(command)) {
+                return restartCommand;
+            }
+        }
+        throw new IllegalArgumentException("R 또는 Q를 입력해주세요.");
+    }
 }

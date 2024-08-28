@@ -43,13 +43,7 @@ public class BridgeGame {
     }
 
     private boolean isRetry(String command) {
-        if(command.equals(RestartCommand.RESTART.getCommand())) {
-            return true;
-        }
-        if (command.equals(RestartCommand.QUIT.getCommand())) {
-            return false;
-        }
-        throw new IllegalArgumentException("R 또는 Q를 입력해주세요.");
+        return RestartCommand.stringToCommand(command) == RestartCommand.RESTART;
     }
 
     public boolean isGameEnd() {
