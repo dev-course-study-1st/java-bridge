@@ -11,14 +11,7 @@ public class SizeValidator {
     }
 
     public static int validate(String input) {
-        return validateNumberRange(validateNumber(input));
-    }
-
-    private static int validateNumberRange(int size) {
-        if (size < BRIDGE_MIN_SIZE.getNumber() || size > BRIDGE_MAX_SIZE.getNumber()) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_RANGE.getMessage());
-        }
-        return size;
+        return (validateNumber(input));
     }
 
     private static int validateNumber(String input) {
