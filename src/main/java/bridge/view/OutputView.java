@@ -36,12 +36,14 @@ public class OutputView {
         List<String> downBridgeState = new ArrayList<>();
         String mark = WRONG;
         for (MoveResult result : results) {
-            if(result.isSuccess())
+            if (result.isSuccess()) {
                 mark = CORRECT;
+            }
             if (result.isEqualDirection(MoveCommand.UP)) {
                 upBridgeState.add(mark);
                 downBridgeState.add(SPACE);
-            } else if (result.isEqualDirection(MoveCommand.DOWN)) {
+            }
+            if (result.isEqualDirection(MoveCommand.DOWN)) {
                 downBridgeState.add(mark);
                 upBridgeState.add(SPACE);
             }
@@ -63,8 +65,9 @@ public class OutputView {
      */
     public static void printResult(BridgeState bridgeState, AttemptCount attemptCount, boolean isSuccess) {
         String successMessage = OUTPUT_FAIL.getMessage();
-        if (isSuccess)
+        if (isSuccess) {
             successMessage = OUTPUT_SUCCESS.getMessage();
+        }
         System.out.println(OUTPUT_GAME_RESULT.getMessage());
         printMap(bridgeState);
         System.out.println(OUTPUT_SUCCESS_RESULT.getMessage() + successMessage);

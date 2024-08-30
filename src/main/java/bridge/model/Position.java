@@ -1,10 +1,12 @@
 package bridge.model;
 
+import static bridge.utils.enums.Const.BRIDGE_INIT_NUMBER;
+
 public class Position {
     private int value;
 
-    public Position(int value) {
-        this.value = value;
+    public Position() {
+        this.value = BRIDGE_INIT_NUMBER.getNumber();
     }
 
     public int getValue() {
@@ -15,7 +17,7 @@ public class Position {
         value++;
     }
 
-    public void reset(int value) {
-        this.value = value;
+    public void reset() {
+        this.value = BRIDGE_INIT_NUMBER.getNumber();
     }
 }

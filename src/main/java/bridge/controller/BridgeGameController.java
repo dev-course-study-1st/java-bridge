@@ -8,16 +8,13 @@ import bridge.utils.handler.InputHandler;
 import bridge.view.InputView;
 import bridge.view.OutputView;
 
-import static bridge.utils.enums.Const.ATTEMPT_INIT_NUMBER;
-
 public class BridgeGameController {
     private final BridgeGameService bridgeGameService;
     private final AttemptCount attemptCount;
 
     public BridgeGameController(BridgeGameService bridgeGameService) {
         this.bridgeGameService = bridgeGameService;
-        this.attemptCount = new AttemptCount(ATTEMPT_INIT_NUMBER.getNumber());
-
+        this.attemptCount = new AttemptCount();
     }
 
     public void run() {

@@ -10,4 +10,8 @@ public class BridgeSize {
     public int getValue() {
         return value;
     }
+
+    private void validate(){
+
+    }
 }
