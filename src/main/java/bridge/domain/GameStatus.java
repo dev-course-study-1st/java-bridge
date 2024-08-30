@@ -1,12 +1,14 @@
 package bridge.domain;
 
+import static bridge.util.Constant.FIRST_TRY;
+
 public class GameStatus {
 
     private int tryCount;
     private boolean isSuccess;
 
     public GameStatus() {
-        this.tryCount = 1;
+        this.tryCount = FIRST_TRY.getValue();
         this.isSuccess = false;
     }
 
