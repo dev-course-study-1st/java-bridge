@@ -5,8 +5,8 @@ import bridge.utils.enums.RestartCommand;
 
 public class BridgeGameService {
     private final BridgeMaker bridgeMaker;
+    private final BridgeState bridgeState;
     private BridgeGame bridgeGame;
-    private BridgeState bridgeState;
 
     public BridgeGameService(BridgeMaker bridgeMaker, BridgeState bridgeState) {
         this.bridgeMaker = bridgeMaker;
