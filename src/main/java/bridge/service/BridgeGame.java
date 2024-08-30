@@ -48,7 +48,7 @@ public class BridgeGame {
     }
 
     private boolean isRetry(String command) {
-        return RestartCommand.stringToCommand(command) == RestartCommand.RESTART;
+        return RestartCommand.isRestart(command);
     }
 
     private void retryGame() {
