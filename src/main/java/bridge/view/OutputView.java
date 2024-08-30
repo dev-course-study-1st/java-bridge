@@ -34,8 +34,8 @@ public class OutputView {
         List<MoveResult> results = bridgeState.getMoveResults();
         List<String> upBridgeState = new ArrayList<>();
         List<String> downBridgeState = new ArrayList<>();
-        String mark = WRONG;
         for (MoveResult result : results) {
+            String mark = WRONG;
             if (result.isSuccess()) {
                 mark = CORRECT;
             }
