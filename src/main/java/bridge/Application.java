@@ -9,7 +9,8 @@ import bridge.utils.generator.BridgeRandomNumberGenerator;
 public class Application {
 
     public static void main(String[] args) {
-        BridgeGameController bridgeGameController = new BridgeGameController(new BridgeGameService(new BridgeMaker(new BridgeRandomNumberGenerator()), new BridgeState()));
+        AppConfig appConfig = new AppConfig();
+        BridgeGameController bridgeGameController = appConfig.setGame();
         bridgeGameController.run();
     }
 }
