@@ -17,9 +17,12 @@ public class BridgeGameService {
         this.bridgeGame = new BridgeGame(bridgeSize, bridgeMaker);
     }
 
-    public BridgeState move(String moveCommand) {
+    public void move(String moveCommand) {
         MoveResult moveResult = bridgeGame.move(moveCommand);
         bridgeState.addMoveResult(moveResult);
+    }
+
+    public BridgeState getBridgeState(){
         return bridgeState;
     }
 
@@ -37,11 +40,11 @@ public class BridgeGameService {
     }
 
     public boolean isGameWon() {
-        return isGameComplete() && isGameSuccess();
+        return isBridgeEndReached() && isGameSuccess();
     }
 
-    private boolean isGameComplete() {
-        return bridgeGame.isGameComplete();
+    private boolean isBridgeEndReached() {
+        return bridgeGame.isBridgeEndReached();
     }
 
 }

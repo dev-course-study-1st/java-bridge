@@ -1,5 +1,4 @@
 package bridge.controller;
-
 import bridge.model.AttemptCount;
 import bridge.model.BridgeSize;
 import bridge.model.BridgeState;
@@ -18,31 +17,44 @@ public class BridgeGameController {
     }
 
     public void run() {
+        initialGame();
+        playGame();
+        printResult();
+    }
+
+    private void initialGame() {
         OutputView.printGameStart();
         BridgeSize bridgeSize = InputHandler.handleInput(InputView::readBridgeSize);
         bridgeGameService.initializeGame(bridgeSize);
-        while (true) {
+    }
+
+    private void playGame() {
+        do {
             String moveCommand = InputHandler.handleInput(InputView::readMoving);
-            BridgeState bridgeState = bridgeGameService.move(moveCommand);
+            bridgeGameService.move(moveCommand);
+            BridgeState bridgeState = bridgeGameService.getBridgeState();
             OutputView.printMap(bridgeState);
-            // 게임이 끝났으면 최종 결과 출력
-            if(bridgeGameService.isGameWon()){
-                OutputView.printResult(bridgeState, attemptCount, true);
+            // 게임에서 이긴 경우
+            if (bridgeGameService.isGameWon()) {
                 return;
             }
-            // 안끝났지만, 마지막이 성공한 경우 continue
-            else if(bridgeGameService.isGameSuccess()){
-                continue;
-            }
-            String gameCommand = InputHandler.handleInput(InputView::readGameCommand);
-            // 재시작 하는 경우 시도 횟수 증가 후 retry
-            if(bridgeGameService.retry(gameCommand)){
-                attemptCount.increment();
-                continue;
-            }
-            // 재시작 아닌 겨웅 최종 결과 출력 후 종료
-            OutputView.printResult(bridgeState, attemptCount, false);
-            return;
+        } while (bridgeGameService.isGameSuccess());
+        retryGame();
+    }
+
+    private void retryGame() {
+        String gameCommand = InputHandler.handleInput(InputView::readGameCommand);
+        // 재시작 하는 경우
+        if (bridgeGameService.retry(gameCommand)) {
+            attemptCount.increment();
+            playGame();
         }
     }
+
+    private void printResult(){
+        BridgeState bridgeState = bridgeGameService.getBridgeState();
+        boolean success = bridgeGameService.isGameWon();
+        OutputView.printResult(bridgeState, attemptCount, success);
+    }
+
 }

@@ -39,7 +39,7 @@ public class BridgeGame {
         currentPosition.reset();
     }
 
-    public boolean isGameComplete() {
+    public boolean isBridgeEndReached() {
         return currentPosition.getValue() == bridge.getSize();
     }
 }
