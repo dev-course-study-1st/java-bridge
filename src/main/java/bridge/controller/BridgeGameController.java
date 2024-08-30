@@ -8,11 +8,16 @@ import bridge.view.InputView;
 import bridge.view.OutputView;
 
 public class BridgeGameController {
-    private final OutputView outputView = new OutputView();
-    private final InputView inputView = new InputView();
+    private final OutputView outputView;
+    private final InputView inputView;
     private BridgeGame bridgeGame;
     private boolean isGameEndStatus = false;
     private boolean isGameRunning = false;
+
+    public BridgeGameController(OutputView outputView, InputView inputView) {
+        this.outputView = outputView;
+        this.inputView = inputView;
+    }
 
     public void play() {
         outputView.initGame();
@@ -22,26 +27,6 @@ public class BridgeGameController {
             playOneRound(bridge);
         }
         outputView.printResult(isGameEndStatus, bridgeGame.getTryCount());
-    }
-
-    private Bridge initBridge() {
-        try {
-            int bridgeSize = inputView.readBridgeSize();
-            return new Bridge(new BridgeMaker(new BridgeRandomNumberGenerator()).makeBridge(bridgeSize));
-        } catch (IllegalArgumentException e) {
-            outputView.printErrorMessage(e.getMessage());
-            return initBridge();
-        }
-    }
-
-    private boolean inputMoving() {
-        try {
-            String moveCommand = inputView.readMoving();
-            return bridgeGame.move(moveCommand);
-        } catch (IllegalArgumentException e) {
-            outputView.printErrorMessage(e.getMessage());
-            return inputMoving();
-        }
     }
 
     private void playOneRound(Bridge bridge) {
@@ -64,6 +49,26 @@ public class BridgeGameController {
             }
         }
         isGameRunning = true;
+    }
+
+    private Bridge initBridge() {
+        try {
+            int bridgeSize = inputView.readBridgeSize();
+            return new Bridge(new BridgeMaker(new BridgeRandomNumberGenerator()).makeBridge(bridgeSize));
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return initBridge();
+        }
+    }
+
+    private boolean inputMoving() {
+        try {
+            String moveCommand = inputView.readMoving();
+            return bridgeGame.move(moveCommand);
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return inputMoving();
+        }
     }
 
     private boolean retry() {
