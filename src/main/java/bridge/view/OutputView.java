@@ -1,7 +1,6 @@
 package bridge.view;
 
 import java.util.List;
-import java.util.StringJoiner;
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -24,8 +23,8 @@ public class OutputView {
      */
     public void printResult(boolean isGameEnd, int tryCount) {
         System.out.println(GameMessage.OUTPUT_END_MESSAGE.getMessage());
-        System.out.printf(GameMessage.OUTPUT_GAME_RESULT.getMessage(),isGameEndStatusToString(isGameEnd));
-        System.out.printf(GameMessage.OUTPUT_TOTAL_COUNT.getMessage(),tryCount);
+        System.out.printf(GameMessage.OUTPUT_GAME_RESULT.getMessage(), isGameEndStatusToString(isGameEnd));
+        System.out.printf(GameMessage.OUTPUT_TOTAL_COUNT.getMessage(), tryCount);
     }
 
     public void initGame() {
@@ -33,11 +32,11 @@ public class OutputView {
     }
 
     public void printErrorMessage(String message) {
-        System.out.printf(GameMessage.OUTPUT_ERROR_MESSAGE.getMessage(),message);
+        System.out.printf(GameMessage.OUTPUT_ERROR_MESSAGE.getMessage(), message);
     }
 
     private String isGameEndStatusToString(boolean isGameEnd) {
-        if(isGameEnd) {
+        if (isGameEnd) {
             return GameMessage.GAME_SUCCESS.getMessage();
         }
         return GameMessage.GAME_FAIL.getMessage();

@@ -10,10 +10,6 @@ public enum RestartCommand {
         this.command = command;
     }
 
-    public String getCommand() {
-        return command;
-    }
-
     public static RestartCommand stringToCommand(String command) {
         for (RestartCommand restartCommand : values()) {
             if (restartCommand.command.equals(command)) {
