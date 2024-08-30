@@ -1,0 +1,18 @@
+package bridge.util;
+
+public enum Constant {
+
+    BRIDGE_MAX_SIZE(20),
+    BRIDGE_MIN_SIZE(3),
+    FIRST_TRY(1);
+
+    private final int value;
+
+    Constant(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
+}
