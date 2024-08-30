@@ -14,41 +14,7 @@ public class OutputView {
      * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
     public void printMap(List<String> userBridge, List<String> gameBridge) {
-        System.out.println(createBridge(userBridge,gameBridge));
-    }
-
-    // TODO : 현재 너무 복잡하게 사용되고 있음, 한가지 기능만을 하도록 변경
-    private String createBridge(List<String> userBridge, List<String> gameBridge) {
-        // 여기서 userBridge 와 gameBridge를 비교한다.
-        // index가 같을 때 같은 문자열이면 O를 출력 아니면 X를 출력
-        StringJoiner bridge = new StringJoiner("\n");
-
-        StringJoiner upBridge = new StringJoiner(" | ");
-        StringJoiner downBridge = new StringJoiner(" | ");
-
-        for(int i=0; i<userBridge.size(); i++) {
-            if (userBridge.get(i).equals(gameBridge.get(i))) {
-                if (userBridge.get(i).equals("U")) {
-                    upBridge.add("O");
-                    downBridge.add(" ");
-                }
-                if (userBridge.get(i).equals("D")) {
-                    upBridge.add(" ");
-                    downBridge.add("O");
-                }
-            }
-            if (!userBridge.get(i).equals(gameBridge.get(i))) {
-                if (userBridge.get(i).equals("U")) {
-                    upBridge.add("X");
-                    downBridge.add(" ");
-                }
-                if (userBridge.get(i).equals("D")) {
-                    upBridge.add(" ");
-                    downBridge.add("X");
-                }
-            }
-        }
-        return bridge.add(String.format("[ %s ]", upBridge)).add(String.format("[ %s ]", downBridge)).toString();
+        System.out.println(StringUtil.createBridge(userBridge, gameBridge));
     }
 
     /**
