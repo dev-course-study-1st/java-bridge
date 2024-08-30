@@ -12,11 +12,16 @@ public enum BridgeEnum {
         this.bridgeSegmentIntType = bridgeSegmentIntType;
     }
 
-    public int getBridgeSegmentIntType() {
-        return bridgeSegmentIntType;
-    }
-
     public String getBridgeSegmentStringType() {
         return bridgeSegmentStringType;
+    }
+
+    public static BridgeEnum intTypeToStringType(int bridgeSegmentIntType) {
+        for (BridgeEnum bridgeEnum : values()) {
+            if (bridgeEnum.bridgeSegmentIntType == bridgeSegmentIntType) {
+                return bridgeEnum;
+            }
+        }
+        throw new IllegalArgumentException("다리의 형태가 올바르지 않습니다.");
     }
 }

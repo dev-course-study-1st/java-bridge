@@ -36,9 +36,9 @@ public class UserBridge {
         }
     }
 
-    private boolean isContainMoveCommand (String command) {
+    private boolean isContainMoveCommand(String command) {
         return Stream.of(BridgeEnum.values())
-                     .map(BridgeEnum::getBridgeSegmentStringType)
-                     .anyMatch(command::equals);
+                .map(BridgeEnum::getBridgeSegmentStringType)
+                .anyMatch(command::equals);
     }
 }

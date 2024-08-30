@@ -47,23 +47,23 @@ public class BridgeGameTest {
         assertThat(bridgeGame.getUserBridge().size()).isEqualTo(1);
     }
 
-    @DisplayName("이동입력을 받았을 때 입력이 다리의 다음 위치와 일치하면 true를 반환하고, 사용자 다리에 추가한다.")
+    @DisplayName("이동 입력을 받았을 때 입력이 다리의 다음 위치와 일치하면 게임 상태가 true")
     @Test
     void isMoveTest() {
         BridgeGame bridgeGame = new BridgeGame(bridge);
-        boolean result = bridgeGame.move("U");
+        bridgeGame.move("U");
 
-        assertThat(result).isTrue();
-        assertThat(bridgeGame.getUserBridge().size()).isEqualTo(1);
+        assertThat(bridgeGame.isRunning()).isTrue();
+
     }
 
-    @DisplayName("이동입력을 받았을 때 입력이 다리의 다음 위치와 일치하지 않으면 false를 반환하고, 사용자 다리에 추가한다.")
+    @DisplayName("이동입력을 받았을 때 입력이 다리의 다음 위치와 일치하지 않으면 게임상태가 false")
     @Test
     void isNotMoveTest() {
         BridgeGame bridgeGame = new BridgeGame(bridge);
+        bridgeGame.move("D");
 
-        assertThat(bridgeGame.move("D")).isFalse();
-        assertThat(bridgeGame.getUserBridge().size()).isEqualTo(1);
+        assertThat(bridgeGame.isRunning()).isFalse();
     }
 
     @DisplayName("재시작 입력을 받으면 사용자의 다리를 초기화하고 시도 횟수를 증가시킨다.")
@@ -84,21 +84,30 @@ public class BridgeGameTest {
     @DisplayName("재시작 입력이 R인 경우 true를 반환한다.")
     @Test
     void retryWithRestartCommand() {
+        //given
         BridgeGame bridgeGame = new BridgeGame(bridge);
         bridgeGame.move("U");
         bridgeGame.move("D");
 
-        assertThat(bridgeGame.retry("R")).isTrue();
+        //when
+        bridgeGame.retry("R");
+
+        //then
+        assertThat(bridgeGame.isRunning()).isTrue();
     }
 
     @DisplayName("재시작 입력이 Q인 경우 false를 반환한다.")
     @Test
     void retryWithQuitCommand() {
+        //given
         BridgeGame bridgeGame = new BridgeGame(bridge);
         bridgeGame.move("U");
         bridgeGame.move("D");
 
-        assertThat(bridgeGame.retry("Q")).isFalse();
+        //when
+        bridgeGame.retry("Q");
+
+        assertThat(bridgeGame.isRunning()).isFalse();
     }
 
     @DisplayName("재시작 입력이 R 또는 Q가 아닌 경우 예외를 발생시킨다.")
@@ -119,6 +128,9 @@ public class BridgeGameTest {
         bridgeGame.move("U");
         bridgeGame.move("U");
 
-        assertThat(bridgeGame.isGameEnd()).isTrue();
+        //when
+        bridgeGame.isGameEnd();
+
+        assertThat(bridgeGame.isGameSuccess()).isTrue();
     }
 }
