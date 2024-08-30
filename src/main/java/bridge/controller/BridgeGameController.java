@@ -11,8 +11,6 @@ public class BridgeGameController {
     private final OutputView outputView;
     private final InputView inputView;
     private BridgeGame bridgeGame;
-    private boolean isGameEndStatus = false;
-    private boolean isGameRunning = false;
 
     public BridgeGameController(OutputView outputView, InputView inputView) {
         this.outputView = outputView;
@@ -23,32 +21,29 @@ public class BridgeGameController {
         outputView.initGame();
         Bridge bridge = initBridge();
         bridgeGame = new BridgeGame(bridge);
-        while (!isGameRunning) {
+        while (bridgeGame.isRunning()) {
             playOneRound(bridge);
         }
-        outputView.printResult(isGameEndStatus, bridgeGame.getTryCount());
+        outputView.printResult(bridgeGame.isGameSuccess(), bridgeGame.getTryCount());
     }
+
 
     private void playOneRound(Bridge bridge) {
         checkMove(bridge);
-        isGameEndStatus = bridgeGame.isGameEnd();
-        if (isGameEndStatus) {
+        bridgeGame.isGameEnd();
+        if (bridgeGame.isGameSuccess()) {
             return;
         }
         playOneRound(bridge);
     }
 
+
     private void checkMove(Bridge bridge) {
-        boolean isMove = inputMoving();
+        inputMoving();
         outputView.printMap(bridgeGame.getUserBridge().getUserBridge(), bridge.getBridge());
-        if (!isMove) {
-            if (!retry()) {
-                isGameEndStatus = false;
-                isGameRunning = false;
-                return;
-            }
+        if (!bridgeGame.isRunning()) {
+            retry();
         }
-        isGameRunning = true;
     }
 
     private Bridge initBridge() {
@@ -61,23 +56,23 @@ public class BridgeGameController {
         }
     }
 
-    private boolean inputMoving() {
+    private void inputMoving() {
         try {
             String moveCommand = inputView.readMoving();
-            return bridgeGame.move(moveCommand);
+            bridgeGame.move(moveCommand);
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
-            return inputMoving();
+            inputMoving();
         }
     }
 
-    private boolean retry() {
+    private void retry() {
         try {
             String gameCommand = inputView.readGameCommand();
-            return bridgeGame.retry(gameCommand);
+            bridgeGame.retry(gameCommand);
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
-            return retry();
+            retry();
         }
     }
 
