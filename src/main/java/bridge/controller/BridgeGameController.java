@@ -12,7 +12,7 @@ import static bridge.utils.enums.Const.ATTEMPT_INIT_NUMBER;
 
 public class BridgeGameController {
     private final BridgeGameService bridgeGameService;
-    private AttemptCount attemptCount;
+    private final AttemptCount attemptCount;
 
     public BridgeGameController(BridgeGameService bridgeGameService) {
         this.bridgeGameService = bridgeGameService;
@@ -25,8 +25,8 @@ public class BridgeGameController {
         BridgeSize bridgeSize = InputHandler.handleInput(InputView::readBridgeSize);
         bridgeGameService.initializeGame(bridgeSize);
         while (true) {
-            String moveCommend = InputHandler.handleInput(InputView::readMoving);
-            BridgeState bridgeState = bridgeGameService.move(moveCommend);
+            String moveCommand = InputHandler.handleInput(InputView::readMoving);
+            BridgeState bridgeState = bridgeGameService.move(moveCommand);
             OutputView.printMap(bridgeState);
             // 게임이 끝났으면 최종 결과 출력
             if(bridgeGameService.isGameWon()){
@@ -37,9 +37,9 @@ public class BridgeGameController {
             else if(bridgeGameService.isGameSuccess()){
                 continue;
             }
-            String gameCommend = InputHandler.handleInput(InputView::readGameCommand);
+            String gameCommand = InputHandler.handleInput(InputView::readGameCommand);
             // 재시작 하는 경우 시도 횟수 증가 후 retry
-            if(bridgeGameService.retry(gameCommend)){
+            if(bridgeGameService.retry(gameCommand)){
                 attemptCount.increment();
                 continue;
             }

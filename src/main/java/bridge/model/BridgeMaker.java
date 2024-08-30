@@ -1,6 +1,6 @@
 package bridge.model;
 
-import bridge.utils.enums.MoveCommend;
+import bridge.utils.enums.MoveCommand;
 import bridge.utils.generator.BridgeNumberGenerator;
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class BridgeMaker {
         for (int i = 0; i < size; i++) {
 
             int direction = bridgeNumberGenerator.generate();
-            bridge.add(MoveCommend.numberOf(direction));
+            bridge.add(MoveCommand.numberOf(direction));
         }
         return bridge;
     }

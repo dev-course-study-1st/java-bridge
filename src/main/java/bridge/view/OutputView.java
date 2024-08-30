@@ -3,7 +3,7 @@ package bridge.view;
 import bridge.model.AttemptCount;
 import bridge.model.BridgeState;
 import bridge.model.MoveResult;
-import bridge.utils.enums.MoveCommend;
+import bridge.utils.enums.MoveCommand;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,10 +38,10 @@ public class OutputView {
         for (MoveResult result : results) {
             if(result.isSuccess())
                 mark = CORRECT;
-            if (result.isEqualDirection(MoveCommend.UP)) {
+            if (result.isEqualDirection(MoveCommand.UP)) {
                 upBridgeState.add(mark);
                 downBridgeState.add(SPACE);
-            } else if (result.isEqualDirection(MoveCommend.DOWN)) {
+            } else if (result.isEqualDirection(MoveCommand.DOWN)) {
                 downBridgeState.add(mark);
                 upBridgeState.add(SPACE);
             }

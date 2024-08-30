@@ -1,6 +1,6 @@
 package bridge.model;
 
-import bridge.utils.enums.MoveCommend;
+import bridge.utils.enums.MoveCommand;
 
 import static bridge.utils.enums.Const.*;
 
@@ -22,10 +22,10 @@ public class BridgeGame {
      * <p>
      * 이동을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
-    public MoveResult move(String moveCommend) {
-        MoveCommend direction = MoveCommend.fromString(moveCommend);
+    public MoveResult move(String moveCommand) {
+        MoveCommand direction = MoveCommand.fromString(moveCommand);
         boolean success = false;
-        if (direction.isEqualTo(bridge.getDirection(currentPosition))) {
+        if (bridge.isRightDirection(currentPosition,direction)) {
             currentPosition.increment();
             success = true;
         }

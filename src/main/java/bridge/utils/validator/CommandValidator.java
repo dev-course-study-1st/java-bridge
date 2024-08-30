@@ -2,8 +2,8 @@ package bridge.utils.validator;
 
 import bridge.utils.enums.ErrorMessage;
 
-import static bridge.utils.enums.RestartCommend.QUIT;
-import static bridge.utils.enums.RestartCommend.RESTART;
+import static bridge.utils.enums.RestartCommand.QUIT;
+import static bridge.utils.enums.RestartCommand.RESTART;
 
 public class CommandValidator {
 
@@ -11,11 +11,11 @@ public class CommandValidator {
     }
 
     public static String validate(String input) {
-        return validateCommend(input);
+        return validateCommand(input);
     }
 
-    private static String validateCommend(String input) {
-        if (!input.equals(RESTART.getCommend()) && !input.equals(QUIT.getCommend())) {
+    private static String validateCommand(String input) {
+        if (!input.equals(RESTART.getCommand()) && !input.equals(QUIT.getCommand())) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_DIRECTION.getMessage());
         }
         return input;

@@ -1,5 +1,7 @@
 package bridge.model;
 
+import bridge.utils.enums.MoveCommand;
+
 import java.util.List;
 
 public class Bridge {
@@ -19,5 +21,9 @@ public class Bridge {
 
     public int getSize(){
         return bridgeDirections.size();
+    }
+
+    public boolean isRightDirection(Position currentPosition, MoveCommand direction) {
+        return bridgeDirections.get(currentPosition.getValue()).equals(direction.getCommand());
     }
 }

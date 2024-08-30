@@ -1,11 +1,7 @@
 package bridge.service;
 
 import bridge.model.*;
-import bridge.utils.enums.RestartCommend;
-
-import java.util.List;
-
-import static bridge.utils.enums.Const.ATTEMPT_INIT_NUMBER;
+import bridge.utils.enums.RestartCommand;
 
 public class BridgeGameService {
     private final BridgeMaker bridgeMaker;
@@ -21,14 +17,14 @@ public class BridgeGameService {
         this.bridgeGame = new BridgeGame(bridgeSize, bridgeMaker);
     }
 
-    public BridgeState move(String moveCommend) {
-        MoveResult moveResult = bridgeGame.move(moveCommend);
+    public BridgeState move(String moveCommand) {
+        MoveResult moveResult = bridgeGame.move(moveCommand);
         bridgeState.addMoveResult(moveResult);
         return bridgeState;
     }
 
-    public boolean retry(String gameCommend) {
-        if (RestartCommend.RESTART.isEqualTo(gameCommend)) {
+    public boolean retry(String gameCommand) {
+        if (RestartCommand.RESTART.isEqualTo(gameCommand)) {
             bridgeGame.retry();
             bridgeState.clear();
             return true;
@@ -41,7 +37,7 @@ public class BridgeGameService {
     }
 
     public boolean isGameWon() {
-        return isGameComplete() && bridgeState.isSuccess();
+        return isGameComplete() && isGameSuccess();
     }
 
     private boolean isGameComplete() {
