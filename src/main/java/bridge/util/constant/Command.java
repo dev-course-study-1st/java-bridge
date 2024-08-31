@@ -1,6 +1,6 @@
 package bridge.util.constant;
 
-import java.util.Optional;
+import static bridge.util.constant.Errors.INVALID_COMMAND_KEY_ERROR;
 
 public enum Command {
     RETRY("R"),
@@ -15,12 +15,12 @@ public enum Command {
         return command;
     }
 
-    public static Optional<Command> getEnum(String command) {
+    public static Command getEnum(String command) {
         for (Command value : values()) {
             if(value.getCommand().equals(command)){
-                return Optional.of(value);
+                return value;
             }
         }
-        return Optional.empty();
+        throw new IllegalArgumentException(INVALID_COMMAND_KEY_ERROR.getMessage());
     }
 }

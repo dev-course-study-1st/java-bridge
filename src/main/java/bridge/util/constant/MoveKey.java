@@ -1,7 +1,8 @@
 package bridge.util.constant;
 
 import java.util.Arrays;
-import java.util.Optional;
+
+import static bridge.util.constant.Errors.INVALID_MOVE_KEY_ERROR;
 
 public enum MoveKey {
     DOWN("D", 0),
@@ -23,9 +24,10 @@ public enum MoveKey {
         return line;
     }
 
-    public static Optional<MoveKey> getEnum(String moveKey) {
+    public static MoveKey getEnum(String moveKey) {
         return Arrays.stream(values())
                 .filter(key -> key.getMoveKey().equals(moveKey))
-                .findFirst();
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(INVALID_MOVE_KEY_ERROR.getMessage()));
     }
 }
