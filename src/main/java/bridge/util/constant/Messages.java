@@ -2,7 +2,6 @@ package bridge.util.constant;
 
 public enum Messages {
 
-    BLANK(" "),
     START_MSG("다리 건너기 게임을 시작합니다.\n"),
     INPUT_LENGTH_MSG("다리의 길이를 입력해주세요."),
     INPUT_MOVE_KEY_MSG("이동할 칸을 선택해주세요. (위: U, 아래: D)"),

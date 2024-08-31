@@ -7,17 +7,18 @@ public class BridgeLength {
     private final int length;
 
     public BridgeLength(String length) {
-        this.length = validate(length);
+        validate(length);
+        this.length = Integer.parseInt(length);
     }
 
-    private void validate(String length) {
+    private static void validate(String length) {
         //숫자로 이루어져있는 지 구성 → 숫자가 범위 내의 숫자인지
         isNumber(length);
         int number = Integer.parseInt(length);
         validateRange(number);
     }
 
-    private void isNumber(String input) {
+    private static  void isNumber(String input) {
         try{
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
@@ -25,7 +26,7 @@ public class BridgeLength {
         }
     }
 
-    private void validateRange(int length) {
+    private static  void validateRange(int length) {
         if(!(length >= Numbers.MIN_LENGTH.getNumber() && length <= Numbers.MAX_LENGTH.getNumber())) {
             throw new IllegalArgumentException(Errors.NOT_IN_RANGE_LENGTH_ERROR.getMessage());
         }
