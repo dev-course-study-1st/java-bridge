@@ -10,16 +10,16 @@ public class BridgeLength {
         this.length = validate(length);
     }
 
-    private int validate(String length) {
+    private void validate(String length) {
         //숫자로 이루어져있는 지 구성 → 숫자가 범위 내의 숫자인지
-        int number = isNumber(length);
+        isNumber(length);
+        int number = Integer.parseInt(length);
         validateRange(number);
-        return number;
     }
 
-    private int isNumber(String input) {
+    private void isNumber(String input) {
         try{
-            return Integer.parseInt(input);
+            Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(Errors.NOT_NUMBER_ERROR.getMessage());
         }
